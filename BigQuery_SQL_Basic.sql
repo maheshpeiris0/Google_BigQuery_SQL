@@ -1,4 +1,5 @@
 
+
 -- upper and lower
 SELECT upper(name) AS Name FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` ;
 
@@ -24,3 +25,14 @@ SELECT name || address Name_Address FROM `bigquery-public-data.austin_bikeshare.
 
 -- dubplication
 SELECT address, count(*) as Duplication FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` group by address having count(*)>1
+
+
+-- max values
+
+SELECT income_100000_124999 FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr`  order by 1 desc LIMIT 3
+
+SELECT * FROM
+(SELECT income_100000_124999, RANK() OVER(ORDER BY income_100000_124999 DESC) AS rank FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr`  ) where rank<=3
+
+
+
