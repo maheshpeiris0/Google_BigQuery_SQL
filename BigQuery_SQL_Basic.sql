@@ -1,5 +1,4 @@
 
-
 -- upper and lower
 SELECT upper(name) AS Name FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` ;
 
@@ -33,6 +32,37 @@ SELECT income_100000_124999 FROM `bigquery-public-data.census_bureau_acs.cbsa_20
 
 SELECT * FROM
 (SELECT income_100000_124999, RANK() OVER(ORDER BY income_100000_124999 DESC) AS rank FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr`  ) where rank<=3
+
+
+-- LIKE
+
+SELECT name , address  FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations`  WHERE address LIKE "%Street%"
+-- END WITH Street - % at beginning
+SELECT name , address  FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations`  WHERE address LIKE "%Street"
+-- BEGIN WITH 1 - % at end
+
+SELECT name , address  FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations`  WHERE address LIKE "1%"
+
+
+-- between
+
+SELECT income_100000_124999 FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr` where income_100000_124999 between 1000 and 100000
+
+-- IN
+
+SELECT * FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` WHERE status IN ('closed')
+
+-- NOT IN
+
+SELECT * FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` WHERE status NOT IN ('closed')
+
+
+-- IS NULL
+SELECT * FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` WHERE alternate_name IS  NULL
+
+-- IS NOT NULL
+
+SELECT * FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` WHERE alternate_name IS NOT NULL
 
 
 
