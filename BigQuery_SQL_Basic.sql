@@ -43,6 +43,8 @@ SELECT name , address  FROM `bigquery-public-data.austin_bikeshare.bikeshare_sta
 
 SELECT name , address  FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations`  WHERE address LIKE "1%"
 
+SELECT name , address  FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` WHERE address LIKE "___ton%"
+
 
 -- between
 
@@ -63,6 +65,18 @@ SELECT * FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` WHERE a
 -- IS NOT NULL
 
 SELECT * FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` WHERE alternate_name IS NOT NULL
+
+
+-- UNION Remove Duplicates
+
+-- UNION ALL    Keep Duplicates
+
+INTERSECT
+--The INTERSECT operator returns rows that are found in the results of both the left and right input queries. Unlike EXCEPT, the positioning of the input queries (to the left versus right of the INTERSECT operator) doesn't matter.
+
+EXCEPT
+--The EXCEPT operator returns rows from the left input query that are not present in the right input query.
+
 
 
 
