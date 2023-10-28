@@ -25,6 +25,8 @@ SELECT name || address Name_Address FROM `bigquery-public-data.austin_bikeshare.
 -- dubplication
 SELECT address, count(*) as Duplication FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` group by address having count(*)>1
 
+SELECT address, count(*) as Duplication FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` group by address having count(*)=1
+
 
 -- max values
 
@@ -32,6 +34,13 @@ SELECT income_100000_124999 FROM `bigquery-public-data.census_bureau_acs.cbsa_20
 
 SELECT * FROM
 (SELECT income_100000_124999, RANK() OVER(ORDER BY income_100000_124999 DESC) AS rank FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr`  ) where rank<=3
+
+
+--RANK VALUE
+
+SELECT * FROM
+(SELECT income_100000_124999, RANK() OVER(ORDER BY income_100000_124999 DESC)  AS RANK_VALUE FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr`) WHERE RANK_VALUE =3
+
 
 
 -- LIKE
@@ -80,3 +89,41 @@ EXCEPT
 
 
 
+-- FIND the 3rd highest value using self join
+
+WITH RankedScore AS (
+SELECT T1.income_100000_124999 AS income_100000_124999,
+  COUNT(DISTINCT T2.income_100000_124999 ) AS Rank_Value
+ FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr`  AS T1
+ JOIN
+ `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr`  AS T2
+ ON
+ T1.income_100000_124999 <= T2.income_100000_124999
+
+ GROUP BY 
+ T1.income_100000_124999
+
+ HAVING  Rank_Value=3
+
+)
+
+-- EVEN NUMBER OF ROWS
+
+WITH NumberedRow AS (
+(SELECT *, ROW_NUMBER() OVER() AS row_num FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr`  )
+)
+SELECT * FROM NumberedRow WHERE MOD(row_num,2) = 0
+
+-- ODD NUMBER OF ROWS
+
+WITH NumberedRow AS (
+(SELECT *, ROW_NUMBER() OVER() AS row_num FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr`  )
+)
+SELECT * FROM NumberedRow WHERE MOD(row_num,2) = 1
+
+
+-- ROW_NUMBER() OVER(PARTITION BY)
+SELECT geo_id, SUM(rent_40_to_50_percent) OVER(PARTITION BY geo_id ORDER BY median_rent DESC) as AVERAGE_RENT FROM `bigquery-public-data.census_bureau_acs.cbsa_2007_1yr` 
+
+ 
+--https://sqlpad.io/tutorial/sql-window-functions/
