@@ -15,7 +15,7 @@ df_result = query_job.to_dataframe()
 print(" query results loaded to the table")
 
 
-<br
+<br>
 table infromation
 
 https://cloud.google.com/bigquery/docs/information-schema-tables
