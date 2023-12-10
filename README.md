@@ -13,3 +13,13 @@ query_job = client.query(sql, job_config=job_config)
 query_job.result()
 df_result = query_job.to_dataframe()
 print(" query results loaded to the table")
+
+
+<br
+table infromation
+
+https://cloud.google.com/bigquery/docs/information-schema-tables
+
+<br>
+
+bq show --format=prettyjson [PROJECT_ID]:[DATASET].[TABLE]
