@@ -127,3 +127,11 @@ SELECT geo_id, SUM(rent_40_to_50_percent) OVER(PARTITION BY geo_id ORDER BY medi
 
  
 --https://sqlpad.io/tutorial/sql-window-functions/
+
+
+-- CROSS JOIN  to get the min values of same table to each row
+
+SELECT * FROM
+(SELECT gameId, year,seasonType,gameStatus,attendance FROM `bigquery-public-data.baseball.games_post_wide` ) AS T1
+CROSS JOIN
+(SELECT MIN(attendance) AS Min_attendance FROM `bigquery-public-data.baseball.games_post_wide`  )
