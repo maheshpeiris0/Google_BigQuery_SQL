@@ -9,7 +9,7 @@ def read_bq_df():
     """
     df = client.query(sql).to_dataframe()
 
-    table_name_bq = 'friendly-plane-294914.test_table.covid19_italy'
+    table_name_bq = 'project.test_table.covid19_italy'
     job_config = bigquery.LoadJobConfig(
         schema=[
             bigquery.SchemaField("country", "STRING"),
