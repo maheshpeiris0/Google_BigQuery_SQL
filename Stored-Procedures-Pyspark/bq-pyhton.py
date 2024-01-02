@@ -7,7 +7,7 @@ def upload_to_bq():
     df.rename(columns={'Adj Close': 'Adj_Close'}, inplace=True)
     client = bigquery.Client()
 
-    table_name_bq = 'friendly-plane-294914.test_table.MSFT_Price_Table'
+    table_name_bq = 'project.test_table.MSFT_Price_Table'
     job_config = bigquery.LoadJobConfig(
         schema=[
             bigquery.SchemaField("Date", "DATE"),
