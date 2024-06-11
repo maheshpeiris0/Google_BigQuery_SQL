@@ -23,3 +23,14 @@ https://cloud.google.com/bigquery/docs/information-schema-tables
 <br>
 
 bq show --format=prettyjson [PROJECT_ID]:[DATASET].[TABLE]
+
+<br>
+project level dataset detail sql
+<br>
+[PROJECT_ID.]`region-REGION`.INFORMATION_SCHEMA.TABLES
+<br>
+TABLE level
+<br>
+SELECT * FROM project.dataset.INFORMATION_SCHEMA.COLUMNS
+
+
