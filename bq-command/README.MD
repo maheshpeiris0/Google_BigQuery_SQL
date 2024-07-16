@@ -13,3 +13,6 @@ FROM `dataset.__TABLES__` where table_id = 'table_id'
 
 
 
+SELECT *
+FROM `project_id.dataset.INFORMATION_SCHEMA.COLUMNS`
+WHERE table_name = 'Table_Name'
